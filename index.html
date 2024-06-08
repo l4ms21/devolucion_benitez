@@ -44,14 +44,14 @@
             margin-top: 20px;
         }
         .buttons button {
-            width: 100px;
+            width: 120px;
             height: 40px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Devolución de Billetes Benitez</h1>
+        <h1>Devolución de Billetes - <span id="currentDate"></span></h1>
         <div id="inputs"></div>
         <div class="result">
             <label id="totalLabel">Total de billetes: </label><br>
@@ -59,7 +59,8 @@
         </div>
         <div id="messageLabel" class="message"></div>
         <div class="buttons">
-            <button onclick="borrar()">Borrar todo</button>
+            <button onclick="borrar()">Borrar</button>
+            <button onclick="mostrarResultados()">Mostrar Resultados</button>
             <button onclick="salir()">Salir</button>
         </div>
     </div>
@@ -71,7 +72,17 @@
         let totalLabel = document.getElementById('totalLabel');
         let seriesLabel = document.getElementById('seriesLabel');
         let messageLabel = document.getElementById('messageLabel');
-        
+
+        function obtenerFechaActual() {
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return today.toLocaleDateString('es-ES', options);
+        }
+
+        function mostrarFechaActual() {
+            document.getElementById('currentDate').textContent = obtenerFechaActual();
+        }
+
         function crearInputs() {
             const inputsDiv = document.getElementById('inputs');
             multiplicadores.forEach((multiplicador, index) => {
@@ -104,9 +115,9 @@
                 let result = multiplicadores[index] * userInput;
                 total += result;
             });
-            totalLabel.textContent = `Total de billetes: ${total}`+ ' billetes';
+            totalLabel.textContent = `Total de billetes: ${total}`;
             let series = total / 20;
-            seriesLabel.textContent = `Número de Series: ${series.toFixed(2)}`+ ' series';
+            seriesLabel.textContent = `Número de Series: ${series.toFixed(2)}`;
 
             let totalBilletes = Math.round(total);
             let ultimoDigito = totalBilletes % 10;
@@ -128,7 +139,61 @@
         }
 
         function borrar() {
+            // Refrescar la página para borrar todo
             location.reload();
+        }
+
+        function mostrarResultados() {
+            const fechaActual = obtenerFechaActual();
+            let results = '';
+            for (let i = 0; i < multiplicadores.length; i++) {
+                results += `<p>${multiplicadores[i]} x ${inputFields[i].value} = ${resultLabels[i].textContent.replace(' = ', '')}</p>`;
+            }
+            results += `<p>${totalLabel.textContent}</p>`;
+            results += `<p>${seriesLabel.textContent}</p>`;
+            results += `<p>${messageLabel.innerHTML}</p>`;
+
+            const resultWindow = window.open('', '_blank');
+            resultWindow.document.write(`
+                <html>
+                <head>
+                    <title>Devolución - ${fechaActual}</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            padding: 20px;
+                        }
+                        h1 {
+                            text-align: center;
+                        }
+                        p {
+                            font-size: 18px;
+                            margin-bottom: 10px;
+                        }
+                        .message {
+                            margin-top: 20px;
+                            font-size: 18px;
+                        }
+                        .buttons {
+                            display: flex;
+                            justify-content: center;
+                            margin-top: 20px;
+                        }
+                        .buttons button {
+                            width: 100px;
+                            height: 40px;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>Devolución - ${fechaActual}</h1>
+                    ${results}
+                    <div class="buttons">
+                        <button onclick="window.close()">Cerrar</button>
+                    </div>
+                </body>
+                </html>
+            `);
         }
 
         function salir() {
@@ -136,6 +201,7 @@
         }
 
         crearInputs();
+        mostrarFechaActual();
     </script>
 </body>
 </html>
