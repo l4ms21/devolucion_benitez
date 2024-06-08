@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Devolución de Billetes Benitez</title>
+    <title>Devolución de Billetes</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -163,7 +163,13 @@
                             font-family: Arial, sans-serif;
                             padding: 20px;
                         }
+                        .container {
+                            width: 400px;
+                            margin: 0 auto;
+                            text-align: center;
+                        }
                         h1 {
+                            font-size: 24px;
                             text-align: center;
                         }
                         p {
@@ -186,10 +192,12 @@
                     </style>
                 </head>
                 <body>
-                    <h1>Devolución - ${fechaActual}</h1>
-                    ${results}
-                    <div class="buttons">
-                        <button onclick="window.close()">Cerrar</button>
+                    <div class="container">
+                        <h1>Devolución - ${fechaActual}</h1>
+                        ${results}
+                        <div class="buttons">
+                            <button onclick="window.close()">Cerrar</button>
+                        </div>
                     </div>
                 </body>
                 </html>
