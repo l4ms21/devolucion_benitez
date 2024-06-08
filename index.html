@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devolución de Billetes Benitez</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            width: 400px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+        }
+        .row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .row input {
+            flex: 1;
+            margin-left: 10px;
+        }
+        .row label {
+            width: 60px;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .result label {
+            font-weight: bold;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .buttons button {
+            width: 100px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Devolución de Billetes Benitez</h1>
+        <div id="inputs"></div>
+        <div class="result">
+            <label id="totalLabel">Total de billetes: </label><br>
+            <label id="seriesLabel">Número de Series: </label>
+        </div>
+        <div id="messageLabel" class="message"></div>
+        <div class="buttons">
+            <button onclick="borrar()">Borrar todo</button>
+            <button onclick="salir()">Salir</button>
+        </div>
+    </div>
+
+    <script>
+        const multiplicadores = [1, 2, 3, 4, 5, 10, 15, 20];
+        let inputFields = [];
+        let resultLabels = [];
+        let totalLabel = document.getElementById('totalLabel');
+        let seriesLabel = document.getElementById('seriesLabel');
+        let messageLabel = document.getElementById('messageLabel');
+        
+        function crearInputs() {
+            const inputsDiv = document.getElementById('inputs');
+            multiplicadores.forEach((multiplicador, index) => {
+                const row = document.createElement('div');
+                row.className = 'row';
+                row.innerHTML = `<label>${multiplicador} x </label>
+                                 <input type="number" oninput="actualizarResultado(${index})"> 
+                                 <label id="resultLabel${index}"> = </label>`;
+                inputsDiv.appendChild(row);
+                inputFields.push(row.querySelector('input'));
+                resultLabels.push(row.querySelector(`#resultLabel${index}`));
+            });
+        }
+
+        function actualizarResultado(index) {
+            try {
+                let userInput = parseFloat(inputFields[index].value) || 0;
+                let result = multiplicadores[index] * userInput;
+                resultLabels[index].textContent = ` = ${result}`;
+                updateTotalAndSeries();
+            } catch (e) {
+                resultLabels[index].textContent = ' = ';
+            }
+        }
+
+        function updateTotalAndSeries() {
+            let total = 0;
+            inputFields.forEach((input, index) => {
+                let userInput = parseFloat(input.value) || 0;
+                let result = multiplicadores[index] * userInput;
+                total += result;
+            });
+            totalLabel.textContent = `Total de billetes: ${total}`+ ' billetes';
+            let series = total / 20;
+            seriesLabel.textContent = `Número de Series: ${series.toFixed(2)}`+ ' series';
+
+            let totalBilletes = Math.round(total);
+            let ultimoDigito = totalBilletes % 10;
+
+            let message = '';
+            if (ultimoDigito !== 0 && ultimoDigito !== 5) {
+                let sobrantesQuitar = ultimoDigito > 5 ? ultimoDigito - 5 : ultimoDigito;
+                let sobrantesAgregar = 10 - ultimoDigito;
+
+                if (sobrantesQuitar !== 5) {
+                    message += `Quitar <b>${sobrantesQuitar}</b> billetes<br>`;
+                }
+                message += `Agregar <b>${sobrantesAgregar}</b> billetes`;
+                seriesLabel.style.color = 'red';
+            } else {
+                seriesLabel.style.color = 'black';
+            }
+            messageLabel.innerHTML = message;
+        }
+
+        function borrar() {
+            location.reload();
+        }
+
+        function salir() {
+            window.close();
+        }
+
+        crearInputs();
+    </script>
+</body>
+</html>
