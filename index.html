@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,17 +26,13 @@
             margin-left: 10px;
         }
         .row label {
-            width: 60px;
+            width: 150px;
         }
         .result {
             margin-top: 20px;
         }
         .result label {
             font-weight: bold;
-        }
-        .message {
-            margin-top: 20px;
-            font-size: 18px;
         }
         .buttons {
             display: flex;
@@ -51,7 +47,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Devolución de Billetes - <span id="currentDate"></span></h1>
+        <h1>Devolución de Billetes</h1>
         <div id="inputs"></div>
         <div class="result">
             <label id="totalLabel">Total de billetes: </label><br>
@@ -61,6 +57,7 @@
         <div class="buttons">
             <button onclick="borrar()">Borrar</button>
             <button onclick="mostrarResultados()">Mostrar Resultados</button>
+            <button onclick="calcularComision()">Calcular Comisión</button>
             <button onclick="salir()">Salir</button>
         </div>
     </div>
@@ -72,6 +69,7 @@
         let totalLabel = document.getElementById('totalLabel');
         let seriesLabel = document.getElementById('seriesLabel');
         let messageLabel = document.getElementById('messageLabel');
+        let total = 0;
 
         function obtenerFechaActual() {
             const today = new Date();
@@ -109,7 +107,7 @@
         }
 
         function updateTotalAndSeries() {
-            let total = 0;
+            total = 0;
             inputFields.forEach((input, index) => {
                 let userInput = parseFloat(input.value) || 0;
                 let result = multiplicadores[index] * userInput;
@@ -204,12 +202,131 @@
             `);
         }
 
+        function calcularComision() {
+            const comisionWindow = window.open('', '_blank');
+
+            const head = comisionWindow.document.head;
+            const body = comisionWindow.document.body;
+
+            const style = comisionWindow.document.createElement('style');
+            style.textContent = `
+                body { font-family: Arial, sans-serif; padding: 20px; }
+                .container { width: 400px; margin: 0 auto; text-align: center; }
+                h1 { font-size: 24px; text-align: center; }
+                .row { display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+                .row input { flex: 1; margin-left: 10px; }
+                .row label { width: 150px; }
+                .result { margin-top: 20px; }
+                .result label { font-weight: bold; }
+                .buttons { display: flex; justify-content: center; margin-top: 20px; }
+                .buttons button { width: 120px; height: 40px; }
+            `;
+            head.appendChild(style);
+
+            const container = comisionWindow.document.createElement('div');
+            container.className = 'container';
+
+            const title = comisionWindow.document.createElement('h1');
+            title.textContent = 'Calcular Comisión';
+            container.appendChild(title);
+
+            const seriesRow = comisionWindow.document.createElement('div');
+            seriesRow.className = 'row';
+            const seriesLabel = comisionWindow.document.createElement('label');
+            seriesLabel.setAttribute('for', 'seriesInput');
+            seriesLabel.textContent = 'Series Recibidas:';
+            const seriesInput = comisionWindow.document.createElement('input');
+            seriesInput.setAttribute('type', 'number');
+            seriesInput.setAttribute('id', 'seriesInput');
+            seriesRow.appendChild(seriesLabel);
+            seriesRow.appendChild(seriesInput);
+            container.appendChild(seriesRow);
+
+            const precioRow = comisionWindow.document.createElement('div');
+            precioRow.className = 'row';
+            const precioLabel = comisionWindow.document.createElement('label');
+            precioLabel.setAttribute('for', 'precioInput');
+            precioLabel.textContent = 'Precio por Billete:';
+            const precioInput = comisionWindow.document.createElement('input');
+            precioInput.setAttribute('type', 'number');
+            precioInput.setAttribute('id', 'precioInput');
+            precioRow.appendChild(precioLabel);
+            precioRow.appendChild(precioInput);
+            container.appendChild(precioRow);
+
+            const resultContainer = comisionWindow.document.createElement('div');
+            resultContainer.className = 'result';
+            const totalBilletesRecibidosLabel = comisionWindow.document.createElement('label');
+            totalBilletesRecibidosLabel.setAttribute('id', 'totalBilletesRecibidosLabel');
+            totalBilletesRecibidosLabel.textContent = 'Total de Billetes Recibidos: ';
+            const totalBilletesDevueltosLabel = comisionWindow.document.createElement('label');
+            totalBilletesDevueltosLabel.setAttribute('id', 'totalBilletesDevueltosLabel');
+            totalBilletesDevueltosLabel.textContent = 'Total de Billetes Devueltos: ' + total;
+            const totalBilletesVendidosLabel = comisionWindow.document.createElement('label');
+            totalBilletesVendidosLabel.setAttribute('id', 'totalBilletesVendidosLabel');
+            totalBilletesVendidosLabel.textContent = 'Total de Billetes Vendidos: ';
+            const totalAmountLabel = comisionWindow.document.createElement('label');
+            totalAmountLabel.setAttribute('id', 'totalAmountLabel');
+            totalAmountLabel.textContent = 'Total en $: ';
+            const comisionLabel = comisionWindow.document.createElement('label');
+            comisionLabel.setAttribute('id', 'comisionLabel');
+            comisionLabel.textContent = 'Comisión del Expendio (10%): ';
+            const pagoAgenciaLabel = comisionWindow.document.createElement('label');
+            pagoAgenciaLabel.setAttribute('id', 'pagoAgenciaLabel');
+            pagoAgenciaLabel.textContent = 'Pago a la Agencia (90%): ';
+            resultContainer.appendChild(totalBilletesRecibidosLabel);
+            resultContainer.appendChild(document.createElement('br'));
+            resultContainer.appendChild(totalBilletesDevueltosLabel);
+            resultContainer.appendChild(document.createElement('br'));
+            resultContainer.appendChild(totalBilletesVendidosLabel);
+            resultContainer.appendChild(document.createElement('br'));
+            resultContainer.appendChild(totalAmountLabel);
+            resultContainer.appendChild(document.createElement('br'));
+            resultContainer.appendChild(comisionLabel);
+            resultContainer.appendChild(document.createElement('br'));
+            resultContainer.appendChild(pagoAgenciaLabel);
+            container.appendChild(resultContainer);
+
+            const buttonsContainer = comisionWindow.document.createElement('div');
+            buttonsContainer.className = 'buttons';
+            const calcularButton = comisionWindow.document.createElement('button');
+            calcularButton.textContent = 'Calcular Comisión';
+            calcularButton.onclick = () => {
+                const series = parseFloat(seriesInput.value) || 0;
+                const precio = parseFloat(precioInput.value) || 0;
+                const totalBilletesRecibidos = series * 20;
+                const totalBilletesVendidos = totalBilletesRecibidos - total;
+                const totalAmount = totalBilletesVendidos * precio;
+                const comision = totalAmount * 0.10;
+                const pagoAgencia = totalAmount * 0.90;
+
+                totalBilletesRecibidosLabel.textContent = 'Total de Billetes Recibidos: ' + totalBilletesRecibidos;
+                totalBilletesVendidosLabel.textContent = 'Total de Billetes Vendidos: ' + totalBilletesVendidos;
+                totalAmountLabel.textContent = 'Total en $: ' + totalAmount.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
+                comisionLabel.textContent = 'Comisión del Expendio (10%): ' + comision.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
+                pagoAgenciaLabel.textContent = 'Pago a la Agencia (90%): ' + pagoAgencia.toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });                
+                //totalAmountLabel.textContent = 'Total en $: ' + totalAmount.toFixed(2);
+                //comisionLabel.textContent = 'Comisión del Expendio (10%): ' + comision.toFixed(2);
+                //pagoAgenciaLabel.textContent = 'Pago a la Agencia (90%): ' + pagoAgencia.toFixed(2);
+            };
+            buttonsContainer.appendChild(calcularButton);
+
+            const cerrarButton = comisionWindow.document.createElement('button');
+            cerrarButton.textContent = 'Cerrar';
+            cerrarButton.onclick = () => {
+                comisionWindow.close();
+            };
+            buttonsContainer.appendChild(cerrarButton);
+
+            container.appendChild(buttonsContainer);
+            body.appendChild(container);
+        }
+
         function salir() {
             window.close();
         }
 
         crearInputs();
-        mostrarFechaActual();
     </script>
 </body>
 </html>
