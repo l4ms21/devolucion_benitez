@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular Bola y Rifa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calcular Bola y Rifa</h1>
+    <label for="ventaBola">Venta Bola:</label>
+    <input type="number" id="ventaBola" name="ventaBola"><br><br>
+    <label for="ventaRifa">Venta Rifa:</label>
+    <input type="number" id="ventaRifa" name="ventaRifa"><br><br>
+    <div class="button-container">
+        <button onclick="calcular()">Calcular</button>
+        <button onclick="mostrarInputs()">Cambiar Porcentajes</button>
+        <button onclick="salir()">Salir
+            <script>function salir() {
+            window.close();
+        }</script></button>
+    </div>
+    <div id="inputContainer" class="hidden">
+        <label for="comisionBola">Comisión Bola (%):</label>
+        <input type="number" id="comisionBola" name="comisionBola" step="0.01"><br><br>
+        <label for="comisionRifa">Comisión Rifa (%):</label>
+        <input type="number" id="comisionRifa" name="comisionRifa" step="0.01"><br><br>
+    </div>
+    <table id="resultTable">
+        <tr>
+            <th></th>
+            <th id="dayOfWeek">Día</th>
+            <th colspan="3">Fecha Actual</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td>BOLA</td>
+            <td>RIFA</td>
+            <td>PAGO DOÑA VICKY</td>
+            <td>COMISIÓN LOCAL</td>
+        </tr>
+        <tr>
+            <td>Venta</td>
+            <td id="ventaBolaResult"></td>
+            <td id="ventaRifaResult"></td>
+            <td id="pagoDonaVickyResult"></td>
+            <td id="comisionLocalResult"></td>
+        </tr>
+        <tr>
+            <td>Comisión</td>
+            <td id="comisionBolaResult"></td>
+            <td id="comisionRifaResult"></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Alcanza</td>
+            <td id="alcanzaBolaResult"></td>
+            <td id="alcanzaRifaResult"></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <script src="script_CByR.js"></script>
+</body>
+</html>

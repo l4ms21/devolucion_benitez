@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    width: 400px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.row input {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.row label {
+    width: 150px;
+}
+
+.result {
+    margin-top: 20px;
+}
+
+.result label {
+    font-weight: bold;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.buttons button {
+    width: 120px;
+    height: 40px;
+}
+
+.hidden {
+    display: none;
+}
+
+#corteContainer {
+    width: 80%;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#corteTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#corteTable th, #corteTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#corteTable th {
+    background-color: #f2f2f2;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+.button-container button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 5px;
+}
