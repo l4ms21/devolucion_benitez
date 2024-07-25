@@ -39,13 +39,15 @@ h1 {
 }
 
 .buttons {
-    display: flex;
+    display: inline-flexbox;
     justify-content: space-between;
     margin-top: 20px;
+    width: auto;
+    align-items: center;
 }
 
 .buttons button {
-    width: 120px;
+    width: auto;
     height: 40px;
 }
 

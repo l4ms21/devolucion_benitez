@@ -95,6 +95,9 @@ function mostrarResultados() {
                 body {
                     font-family: Arial, sans-serif;
                     padding: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
                 }
                 .container {
                     width: 400px;
@@ -447,6 +450,11 @@ function abrirCorteBolaYRifa() {
 
 function salir() {
     window.close();
+}
+
+function abrirPyR() {
+    const PyRWindow = window.open('PyR.html', '_blank');
+    //window.location.href = 'PyR.html';
 }
 
 crearInputs();

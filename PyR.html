@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corte de Premios y Reintegros</title>
+    <link rel="stylesheet" href="stylePyR.css">
+</head>
+<body>
+    <h1>Corte de Premios y Reintegros</h1>
+    <div class="container">
+        <!-- Sección de Premios -->
+        <div class="section">
+            <h2>Premios</h2>
+            <button class="add-row" onclick="addRow('premios')">+</button>
+            <table id="premiosTable">
+                <thead>
+                    <tr>
+                        <th># de Cachitos</th>
+                        <th>Premio</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="number" class="cachitos" onchange="calculateRow(this)"></td>
+                        <td>
+                            <input type="text" class="premio" list="premiosList" onchange="calculateRow(this)">
+                            <datalist id="premiosList">
+                                <option value="16.28">
+                                <option value="18.60">
+                                <option value="23.25">
+                                <option value="37.20">
+                                <option value="46.50">
+                                <option value="55.80">
+                                <option value="74.40">
+                                <option value="83.70">
+                                <option value="93.00">
+                                <option value="102.30">
+                                <option value="111.60">
+                                <option value="116.25">
+                                <option value="139.50">
+                                <option value="167.40">
+                                <option value="186.00">
+                                <option value="195.30">
+                                <option value="204.60">
+                                <option value="223.20">
+                                <option value="232.50">
+                                <option value="234.36">
+                                <option value="267.84">
+                                <option value="279.00">                                
+                                <option value="325.50">
+                                <option value="334.80">
+                                <option value="372.00">
+                                <option value="409.20">
+                                <option value="465.00">
+                                <option value="558.00">
+                                <option value="613.80">
+                                <option value="651.00">
+                                <option value="669.60">
+                                <option value="744.00">
+                                <option value="818.40">
+                                <option value="837.00">
+                                <option value="930.00">
+                                <option value="1,004.40">
+                                <option value="1,162.50">
+                                <option value="1,209.00">
+                                <option value="1,227.60">
+                                <option value="1,395.00">
+                                <option value="1,674.00">
+                                <option value="1,860.00">
+                            </datalist>
+                        </td>
+                        <td><span class="total"></span></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2"><strong>Total en Premios:</strong></td>
+                        <td id="premiosTotal">0</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <!-- Sección de Reintegros -->
+        <div class="section">
+            <h2>Reintegros</h2>
+            <button class="add-row" onclick="addRow('reintegros')">+</button>
+            <table id="reintegrosTable">
+                <thead>
+                    <tr>
+                        <th># de Cachitos</th>
+                        <th>Valor</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="number" class="cachitos" onchange="calculateRow(this)"></td>
+                        <td>
+                            <input type="text" class="valor" list="reintegrosList" onchange="calculateRow(this)">
+                            <datalist id="reintegrosList">
+                                <option value="20">
+                                <option value="30">
+                                <option value="35">
+                                <option value="40">
+                                <option value="60">
+                                <option value="80">
+                                <option value="100">
+                                <option value="120">
+                            </datalist>
+                        </td>
+                        <td><span class="total"></span></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2"><strong>Total en Reintegros:</strong></td>
+                        <td id="reintegrosTotal">0</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <!-- Total General -->
+        <div class="total-general">
+            <h3>Total General</h3>
+            <p id="totalGeneral">0</p>
+        </div>
+        <div>
+            <button id="boton-salir" onclick="salir()">Salir
+            <script>function salir() {
+            window.close();
+        }</script></button>
+        </div>
+    </div>
+
+    <script src="script_PyR.js"></script>
+</body>
+</html>

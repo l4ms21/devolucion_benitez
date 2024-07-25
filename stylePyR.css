@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    width: 90%;
+    /*max-width: 1200px;*/
+}
+
+h1 {
+    text-align: center;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.add-row {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+tfoot tr td {
+    font-weight: bold;
+}
+
+.total-general {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+.section {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.add-row {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.add-row:hover {
+    background-color: #45a049;
+}
+
+#boton-salir {
+    display: inline-flexbox;
+    justify-content: space-between;
+    margin-top: 20px;
+    align-items: center;
+    width: auto;
+    height: 40px;
+}
+
+input[type="text"], input[type="number"] {
+    width: auto; /* Permite que el ancho se ajuste al contenido */
+    max-width: 150px; /* Establece un ancho máximo para los cuadros de texto */
+    box-sizing: border-box; /* Asegura que el padding y el border se incluyan en el ancho total */
+    padding: 5px; /* Añade un poco de espacio interno */
+    margin: 5px 0; /* Añade un margen superior e inferior */
+}
+
+input[type="text"].wide, input[type="number"].wide {
+    width: 100%; /* Opcional: Si deseas que algunos cuadros de texto se expandan para ocupar todo el ancho del contenedor */
+    max-width: none; /* Opcional: Elimina el límite de ancho máximo para ciertos cuadros de texto */
+}
