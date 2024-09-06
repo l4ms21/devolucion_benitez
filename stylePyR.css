@@ -73,7 +73,7 @@ tfoot tr td {
     background-color: #45a049;
 }
 
-#boton-salir {
+#boton-salir, #print-button {
     display: inline-flexbox;
     justify-content: space-between;
     margin-top: 20px;
