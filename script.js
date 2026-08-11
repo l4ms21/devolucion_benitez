@@ -1,4 +1,4 @@
-const multiplicadores = [1, 2, 3, 4, 5, 10, 15, 20];
+const multiplicadores = [15, 10, 5, 4, 3, 2, 1];
 let inputFields = [];
 let resultLabels = [];
 let totalLabel = document.getElementById('totalLabel');
@@ -18,6 +18,10 @@ function mostrarFechaActual() {
 
 function crearInputs() {
     const inputsDiv = document.getElementById('inputs');
+    inputsDiv.innerHTML = ''; // Asegura limpiar antes de crear
+    inputFields = [];
+    resultLabels = [];
+
     multiplicadores.forEach((multiplicador, index) => {
         const row = document.createElement('div');
         row.className = 'row';
@@ -72,7 +76,6 @@ function updateTotalAndSeries() {
 }
 
 function borrar() {
-    // Refrescar la página para borrar todo
     location.reload();
 }
 
@@ -80,7 +83,8 @@ function mostrarResultados() {
     const fechaActual = obtenerFechaActual();
     let results = '';
     for (let i = 0; i < multiplicadores.length; i++) {
-        results += `<p>${multiplicadores[i]} x ${inputFields[i].value} = ${resultLabels[i].textContent.replace(' = ', '')}</p>`;
+        let valInput = inputFields[i].value || 0;
+        results += `<p>${multiplicadores[i]} x ${valInput} = ${resultLabels[i].textContent.replace(' = ', '')}</p>`;
     }
     results += `<p>${totalLabel.textContent}</p>`;
     results += `<p>${seriesLabel.textContent}</p>`;
