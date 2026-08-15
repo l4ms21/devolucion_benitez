@@ -52,26 +52,26 @@ function updateTotalAndSeries() {
         let result = multiplicadores[index] * userInput;
         total += result;
     });
+    
     totalLabel.textContent = `Total de billetes: ${total}`;
     let series = total / 20;
     seriesLabel.textContent = `Número de Series: ${series.toFixed(2)}`;
 
     let totalBilletes = Math.round(total);
-    let ultimoDigito = totalBilletes % 10;
+    let resto = totalBilletes % 5;
 
     let message = '';
-    if (ultimoDigito !== 0 && ultimoDigito !== 5) {
-        let sobrantesQuitar = ultimoDigito > 5 ? ultimoDigito - 5 : ultimoDigito;
-        let sobrantesAgregar = 10 - ultimoDigito;
-
-        if (sobrantesQuitar !== 5) {
-            message += `Quitar <b>${sobrantesQuitar}</b> billetes<br>`;
-        }
-        message += `Agregar <b>${sobrantesAgregar}</b> billetes`;
+    if (totalBilletes > 0 && resto === 0) {
+        message = '<b><span style="color: green;">✔ Paquetes cuadrados</span></b>';
+        seriesLabel.style.color = 'black';
+    } else if (resto !== 0) {
+        let faltan = 5 - resto;
+        message = `Quitar <b>${resto}</b> billetes<br>Agregar <b>${faltan}</b> billetes`;
         seriesLabel.style.color = 'red';
     } else {
         seriesLabel.style.color = 'black';
     }
+    
     messageLabel.innerHTML = message;
 }
 
